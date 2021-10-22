@@ -133,16 +133,13 @@ O projeto, enquanto em andamento, está dentro do ambiente virtual com todas as 
 
 ```bash
 # Clone este repositório
-git clone https://github.com/FarinhaProgrammer/G2-E-Commerce.git
+git clone https://github.com/pedro-fmm/repo-SySales.git
 
 # Acesse a pasta do projeto no terminal/cmd
-cd G2-E-Commerce
+cd repo-Sysales
 
-# Vá para a pasta do ambiente virtual
-cd Entra21
-
-# Vá para a pasta do Projeto
-cd Ecommerce
+# Instale os requirements
+pip install -r requirements.txt
 
 # Execute a aplicação em modo de desenvolvimento
 python manage.py runserver
