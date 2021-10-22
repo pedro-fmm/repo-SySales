@@ -1,0 +1,73 @@
+{% extends 'pedidos/index-pedidos.html' %}
+
+{% load static %}
+   
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+
+<style>
+    span a {
+        color: black;
+        text-decoration: none;
+    }
+
+</style>
+
+<section>
+    <div class="wrapper">
+    
+        <div class="checkout">
+   
+            <div class="titulo">
+                <span class="fa fa-user"></span>
+                <h1>Identificação</h1>
+            </div><!--/titulo-->
+            
+            {% if user.is_authenticated %}
+
+                <div class="entrar">
+                    <span>Você já está autenticado como: {{request.user.nome_usuario}}.</span>
+                    <br><br>
+                    <div class="bt-concluir-compra"><a href="{% url 'pedidos:endereco' %}">Continuar > </a></div>
+
+                    <div class="alterar-pedido">
+                        <a href="{% url 'carrinho:retrieve' %}"><< alterar pedido</a>
+                    </div><!--/alterar-pedido-->
+                    
+                </div><!--/entrar-->
+
+                <div class="cadastrar">
+                    <span>Deseja se autenticar como outra pessoa?</span>
+                    <br><br><br>
+                    <div class="bt-continuar-comprando"><a href="{% url 'login' %}?next=/pedidos/identificacao/"> Faça login ></a></div>
+                </div><!--/cadastrar-->
+
+            {% else %}
+
+            <div class="entrar">
+                <span>Já tenho cadastro</span>
+                <span><a href="{% url 'login' %}">Clique aqui para fazer login.</a></span>
+                <div class="bt-concluir-compra"><a href="{% url 'login' %}?next=/pedidos/session-to-account/?authenticated=True">Continuar > </a></div>
+
+                <div class="alterar-pedido">
+                    <a href="{% url 'carrinho:retrieve' %}"><< alterar pedido</a>
+                </div><!--/alterar-pedido-->
+                
+            </div><!--/entrar-->
+
+            <div class="cadastrar">
+                <span>Ainda não tenho cadastro</span>
+                <br><br><br>
+                <div class="bt-continuar-comprando"><a href="{% url 'users:cadastrar' %}?next=/pedidos/session-to-account/?authenticated=True"> Criar cadastro ></a></div>
+            </div><!--/cadastrar-->
+             
+            {% endif %}
+
+        </div><!--/checkout-->
+        
+        
+     </div><!--/wrapper-->
+</section>
+
+{% endblock %}

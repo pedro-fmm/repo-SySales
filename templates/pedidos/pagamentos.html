@@ -1,0 +1,110 @@
+{% extends 'pedidos/index-pedidos.html' %}
+
+{% load static %}
+   
+{% block title %}Pagamento{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<section>
+    <div class="wrapper">
+    
+        <div class="checkout">
+   
+            <div class="titulo">
+                <span class="fa fa-credit-card"></span>
+                <h1>Pagamento</h1>
+            </div><!--/titulo-->
+            
+
+            <div class="seu-pedido">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td colspan="2" class="header" >Seu pedido <a id="revisar-pedido" href="{% url 'carrinho:retrieve' %}">Revisar pedido</a></td>
+                  </tr>
+                  <tr>
+                    <td class="dados">Total em Produtos ({{total_itens}} itens)</td>
+                    <td class="dados">R$ {{total}}</td>
+                  </tr>
+                  <tr>
+                    <td class="dados">Frete</td>
+                    <td class="dados">R$ {{frete}}</td>
+                  </tr>
+                  <tr>
+                    <td class="total">Total</td>
+                    <td class="total">R$ {{total_final}}</td>
+                  </tr>
+                </table>
+            </div><!--/seu-pedido-->
+            
+             <div class="endereco-entrega">
+                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td colspan="2" class="header" >Endereço de Entrega <a href="{% url 'pedidos:endereco' %}">Selecionar outro endereço</a></td>
+                  </tr>
+                  <tr>
+                    <td class="dados"><strong>Meu Endereço</strong></td>
+                  </tr>
+                  <tr>
+                    <td class="dados">
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td class="dados">
+                              <table>
+                              <tr>
+                                  <td align="right"><b>Nome do Endereço:</b></td>
+                                  <br><td>{{endereco.nome}}</td>
+                              </tr>
+                              <tr>
+                              <tr>
+                                  <td align="right"><b>Destinatario:</b></td>
+                                  <td>{{endereco.usuario}}</td>
+                              </tr>
+                              <tr>
+                                  <td align="right"><b>Endereço:</b></td>
+                                  <td>{{endereco.rua}}, {{endereco.numero}}</td>
+                              </tr>
+                              <tr>
+                                  <td align="right"><b>Bairro:</b></td>
+                                  <td>{{endereco.bairro}}</td>
+                              </tr>
+                              <tr>
+                                  <td align="right"><b>CEP:</b></td>
+                                  <td>{{endereco.cep}}</td>
+                              </tr>
+                              <tr>
+                                  <td align="right"><b>Cidade:</b></td>
+                                  <td>{{endereco.cidade}} - {{endereco.estado}} - {{endereco.pais}}</td>
+                              </tr>
+                              <tr>
+                                  <td align="right"><b>Referência:</b></td>
+                                  <td>{{endereco.referencia}}</td>
+                              </tr>
+                              </table>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                    </tr>
+                </table>
+            </div><!--/endereco-entrega-->
+            
+            <div class="titulo">
+                <p>Escolha a Forma de Pagamento</p>
+            </div><!--/titulo-->
+            
+          <div class="forma-de-pagamento" id="B">
+                <div class="tipo">
+                    <p><span>Boleto</span><br>Pagamento com boleto bancário</p>
+                    <div class="bt-selecionar"><a href="{% url 'pedidos:finaliza-pedido' fm=1 %}">Selecionar</a></div>
+                </div><!--/tipo--> 
+                <br><br> 
+          </div><!--/forma-de-pagamento-->         
+    </div><!--/checkout-->        
+    </div><!--/wrapper-->
+</section>
+
+{% endblock %}
