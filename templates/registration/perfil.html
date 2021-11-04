@@ -133,7 +133,7 @@
             <p class="nome-pedido">Usuário: {{pedido.usuario}}</p>
             <p class="valor-pedido">Valor: R${{pedido.valor}}</p>
             <p class="endereco-pedido">Endereço: {{pedido.endereco}}</p>
-            <p class="status">Para verificar o status do pedido clique <a class="a-status" href="{% url 'pedidos:confirmacao' %}">aqui</a></p>
+            <p class="status">Para verificar o status do pedido clique <a class="a-status" href="{% url 'pedidos:confirmacao' pk=pedido.id %}">aqui</a></p>
         </div>
 
         {% endfor %}
