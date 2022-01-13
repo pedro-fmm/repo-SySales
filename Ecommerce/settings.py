@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
-import django_heroku
+# import django_heroku
 import os
 from pathlib import Path
 
@@ -176,7 +176,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfile')
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
 
 try:
     from Ecommerce.local_settings import *
