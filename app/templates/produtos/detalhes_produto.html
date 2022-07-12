@@ -1,0 +1,53 @@
+{% extends 'index.html' %}
+
+{% load static %}
+
+{% block title %}{{nome}}{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/style-produtos.css' %}">
+
+<!-- DETALHES DO PRODUTO -->
+
+<section class="container_detalhes">
+<div class="grid_produto_detalhe">
+    <h2 id="mobile_nome" class="nome_detalhe">{{produto.nome}}</h2><br>
+    <div class="foto_detalhe"><img src="{{produto.imagem.url}}"></div>
+    <div class="descricao_detalhe">
+        <p><br><br><strong>Detalhes:</strong> <br><br> {{produto.descricao}}</p>
+    </div>
+    <div class="cart_detalhe">
+        <h2 class="nome_detalhe">{{produto.nome}}</h2><br>
+        <p id="preco_detalhe">R${{produto.preco}}</p>
+        {% if in_cart %}
+            <button class="change_cart ajax-class" value="{% url 'carrinho:remover' pk=produto.id %}">Remover do carrinho</button>
+        {% else %}
+            <button class="change_cart ajax-class" value="{% url 'carrinho:adicionar' pk=produto.id %}">Adicionar ao carrinho</button>
+        {% endif %}
+    </div>
+</div>
+</section>
+
+{% if success %}
+<div id='images'>
+    <img src="{% static 'img/carrinho.png' %}" alt="carrinho de compras" id="carrinho-img">
+    <img src="{% static 'img/ok.png' %}" alt="okay imagem" id="ok-img">
+</div>
+{% endif %}
+
+<!-- RECOMENDADOS -->
+
+<p id="detalhes_recomendados">Itens que você talvez goste</p>
+
+<section class="recomendados">
+    {% for j in dados %}
+    <div class="grid_recomendados">
+        <div class="foto_recomendados"><img src="{{j.imagem.url}}" alt="Foto de {{j.nome}}"></div>
+        <div class="nome_recomendados"><a href="{% url 'produtos:detalhes_produto' pk=j.id %}">{{j.nome}}</a></div>
+        <div class="preco_recomendados">R${{j.preco}}</div>
+    </div> 
+    {% endfor %}
+</section>
+
+{% endblock %}

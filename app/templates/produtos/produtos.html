@@ -1,0 +1,57 @@
+{% extends 'index.html' %}
+
+{% load static %}
+
+{% block title %}{{titulo}}{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/style-produtos.css' %}">
+
+<!-- BLOCO DISPLAY DE ITENS/CATALOGO -->
+
+<section class="catalogo">
+    {% for i in dados %}
+        <div class="grid_produto">
+            <div class="foto_produto"><img src="{{i.imagem.url}}" alt="Foto de {{i.nome}}"></div>
+            <div class="nome_produto"><a href="{% url 'produtos:detalhes_produto' pk=i.id %}">{{i.nome}}</a></div>
+            <div class="preco_produto">R${{i.preco}}</div>
+        </div>           
+    {% endfor %}
+</section>
+
+<section class="paginacao">
+    <span class="buttons-paginacao">
+        {% if dados.has_previous %}
+            <a href="?pagina={{ dados.previous_page_number }}&search={{search}}"><i class="fas fa-arrow-left"></i></a>
+        {% endif %}
+        {% if dados.paginator.num_pages %}
+        <span class="atual">
+            {{ dados.number }} de {{ dados.paginator.num_pages }}
+        </span>
+        {% endif %}
+        {% if dados.has_next %}
+            <a href="?pagina={{ dados.next_page_number }}&search={{search}}"><i class="fas fa-arrow-right"></i></a>
+        {% endif %}
+    </span>
+</section>
+
+<footer>
+    <link rel="stylesheet" href="{% static 'css/style-footer.css' %}">
+
+    <h3>SySales</h3>
+    <p>O lugar perfeito para o seu E-commerce</p>
+    <ul class="socials">
+        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+        <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+        <li><a href="#"><i class="fa fa-linkedin-square"></i></a></li>
+    </ul>
+    <div class="footer-bottom">
+        <p>copyright &copy;2021 SySales.</p>
+    </div>
+
+</footer>
+
+{% endblock %}
